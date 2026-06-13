@@ -1,0 +1,10 @@
+CREATE CONSTRAINT customer_id IF NOT EXISTS FOR (c:Customer) REQUIRE c.customerId IS UNIQUE;
+CREATE CONSTRAINT merchant_id IF NOT EXISTS FOR (m:Merchant) REQUIRE m.merchantId IS UNIQUE;
+CREATE CONSTRAINT instrument_id IF NOT EXISTS FOR (i:PaymentInstrument) REQUIRE i.instrumentId IS UNIQUE;
+CREATE CONSTRAINT payment_id IF NOT EXISTS FOR (p:Payment) REQUIRE p.paymentId IS UNIQUE;
+CREATE CONSTRAINT device_id IF NOT EXISTS FOR (d:Device) REQUIRE d.deviceId IS UNIQUE;
+CREATE CONSTRAINT ip_id IF NOT EXISTS FOR (ip:IpAddress) REQUIRE ip.ip IS UNIQUE;
+CREATE INDEX payment_status IF NOT EXISTS FOR (p:Payment) ON (p.status);
+CREATE INDEX payment_created_at IF NOT EXISTS FOR (p:Payment) ON (p.createdAt);
+CREATE INDEX customer_segment IF NOT EXISTS FOR (c:Customer) ON (c.segment);
+CREATE INDEX merchant_mcc IF NOT EXISTS FOR (m:Merchant) ON (m.mcc);
