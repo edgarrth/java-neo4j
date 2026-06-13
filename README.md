@@ -23,10 +23,14 @@ src/main/java/com/edgarrt/poc/paymentprocessing
 
 ## Modelo de grafo
 
-```text
-(Customer)-[:INITIATED]->(Payment)-[:PAID_TO]->(Merchant)
-(Payment)-[:USED_INSTRUMENT]->(PaymentInstrument)
-(Customer)-[:OWNS_OR_USES]->(PaymentInstrument)
+```mermaid
+graph TD
+    C[Customer] -->|OWNS| PI[Payment Instrument]
+    C -->|INITIATES| P[Payment]
+    P -->|USES| PI
+    P -->|PAID_TO| M[Merchant]
+    M -->|HAS_CATEGORY| MC[Merchant Category]
+    P -->|HAS_RISK_ANALYSIS| R[Risk Analysis]
 ```
 
 ## Requisitos
