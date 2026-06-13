@@ -1,0 +1,56 @@
+### Crear cliente
+POST http://localhost:8080/payments/v1/customers
+Content-Type: application/json
+
+{
+  "customerId": "CUS-100",
+  "fullName": "Edgar Rodriguez",
+  "documentNumber": "12345678",
+  "segment": "PREMIUM"
+}
+
+### Crear comercio
+POST http://localhost:8080/payments/v1/merchants
+Content-Type: application/json
+
+{
+  "merchantId": "MER-100",
+  "legalName": "Payment Processing Store SAC",
+  "mcc": "5732",
+  "country": "PE"
+}
+
+### Registrar instrumento
+POST http://localhost:8080/payments/v1/instruments
+Content-Type: application/json
+
+{
+  "instrumentId": "CARD-100",
+  "type": "CARD",
+  "fingerprint": "fp-card-100",
+  "brand": "VISA",
+  "last4": "4242"
+}
+
+### Autorizar pago
+POST http://localhost:8080/payments/v1/payments/authorize
+Content-Type: application/json
+
+{
+  "paymentId": "PAY-100",
+  "customerId": "CUS-100",
+  "merchantId": "MER-100",
+  "instrumentId": "CARD-100",
+  "amount": 250.50,
+  "currency": "PEN",
+  "channel": "MOBILE_APP"
+}
+
+### Consultar pago
+GET http://localhost:8080/payments/v1/payments/PAY-100
+
+### Analizar riesgo de un pago
+GET http://localhost:8080/payments/v1/payments/PAY-100/risk-analysis
+
+### Red de riesgo de un cliente
+GET http://localhost:8080/payments/v1/customers/CUS-100/risk-network

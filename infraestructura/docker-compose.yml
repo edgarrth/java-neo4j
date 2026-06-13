@@ -1,0 +1,25 @@
+services:
+  neo4j:
+    image: neo4j:5.26-community
+    container_name: neo4j-payment-processing
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/paymentspoc123
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
+      NEO4J_dbms_security_procedures_allowlist: apoc.*
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - ./neo4j/init.cypher:/var/lib/neo4j/import/init.cypher:ro
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p paymentspoc123 'RETURN 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
