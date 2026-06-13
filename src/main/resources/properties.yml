@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: neo4j-payment-processing-poc
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: paymentspoc123
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+poc:
+  risk:
+    highAmountThreshold: 5000
+    sharedInstrumentThreshold: 3
+    failedPaymentThreshold: 2
